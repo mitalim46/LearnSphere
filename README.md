@@ -280,7 +280,6 @@ Open `frontend/index.html` in your browser or use VS Code Live Server.
 
 ## 🌱 Impact
 
-| | |
 |---|---|
 | ✅ | Builds trust-first AI learning systems |
 | 🌍 | Connects remote students with expert teachers |
