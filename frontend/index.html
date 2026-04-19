@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LearnSphere — Sign In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;450;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#09090b;
+  --surface:#111113;
+  --surface2:#18181b;
+  --surface3:#1f1f23;
+  --border:#27272a;
+  --border2:#3f3f46;
+  --text:#fafafa;
+  --text2:#a1a1aa;
+  --text3:#52525b;
+  --accent:#6366f1;
+  --accent-light:#818cf8;
+  --accent-glow:rgba(99,102,241,0.15);
+  --green:#22c55e;
+  --green-dim:rgba(34,197,94,0.1);
+  --amber:#f59e0b;
+  --red:#ef4444;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:grid;place-items:center;position:relative;overflow:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -20%,rgba(99,102,241,0.08),transparent 70%);pointer-events:none}
+ 
+/* Grid pattern */
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:48px 48px;opacity:0.25;pointer-events:none}
+ 
+.auth-wrap{position:relative;z-index:1;width:100%;max-width:400px;padding:24px}
+ 
+.brand{text-align:center;margin-bottom:40px}
+.brand-mark{display:inline-flex;align-items:center;gap:10px;margin-bottom:20px}
+.brand-icon{width:40px;height:40px;background:var(--accent);border-radius:10px;display:grid;place-items:center;font-size:25px;box-shadow:0 0 0 1px rgba(99,102,241,0.4),0 8px 24px rgba(99,102,241,0.3)}
+.brand-name{font-family:'Canva Sans',serif;font-size:36px;color:var(--text);letter-spacing:-0.3px}
+.brand h2{font-size:24px;font-weight:600;letter-spacing:-0.5px;color:var(--text);margin-bottom:8px}
+.brand p{font-size:14px;color:var(--text2);line-height:1.5}
+ 
+.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;box-shadow:0 1px 0 0 rgba(255,255,255,0.04) inset,0 20px 60px rgba(0,0,0,0.5)}
+ 
+.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:28px}
+.role-opt{background:var(--surface2);border:1.5px solid var(--border);border-radius:10px;padding:14px 12px;cursor:pointer;text-align:center;transition:all 0.15s;color:var(--text2);user-select:none}
+.role-opt:hover{border-color:var(--border2);color:var(--text)}
+.role-opt.active{border-color:var(--accent);background:var(--accent-glow);color:var(--text)}
+.role-opt .ri{font-size:22px;margin-bottom:6px}
+.role-opt .rl{font-size:13px;font-weight:500}
+.role-opt .rd{font-size:15px;color:var(--text3);margin-top:2px}
+.role-opt.active .rd{color:var(--accent-light)}
+ 
+.field{margin-bottom:16px}
+.field label{display:block;font-size:12px;font-weight:500;color:var(--text2);margin-bottom:7px;letter-spacing:0.2px;text-transform:uppercase}
+.field input{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color 0.15s}
+.field input:focus{border-color:var(--accent)}
+.field input::placeholder{color:var(--text3)}
+ 
+.btn-main{width:100%;background:var(--accent);border:none;border-radius:8px;padding:12px;color:#fff;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.15s;margin-top:4px;letter-spacing:0.1px;box-shadow:0 1px 0 rgba(255,255,255,0.1) inset}
+.btn-main:hover{background:#5254cc;transform:translateY(-1px);box-shadow:0 4px 16px rgba(99,102,241,0.4),0 1px 0 rgba(255,255,255,0.1) inset}
+.btn-main:active{transform:translateY(0)}
+ 
+.divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:var(--text3);font-size:12px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+ 
+.switch-text{text-align:center;font-size:13px;color:var(--text2);margin-top:20px}
+.switch-text a{color:var(--accent-light);cursor:pointer;font-weight:500;text-decoration:none}
+.switch-text a:hover{color:var(--text)}
+ 
+.hidden{display:none}
+ 
+.toast-stack{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:8px;z-index:999}
+.toast{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:13px;color:var(--text);box-shadow:0 8px 24px rgba(0,0,0,0.4);animation:toastIn 0.25s ease;max-width:280px}
+.toast.ok{border-color:rgba(34,197,94,0.4);color:var(--green)}
+.toast.err{border-color:rgba(239,68,68,0.4);color:var(--red)}
+@keyframes toastIn{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:translateX(0)}}
+ 
+@media(max-width:480px){.auth-wrap{padding:16px}.card{padding:24px}}
+</style>
+</head>
+<body>
+<div class="auth-wrap">
+  <div class="brand">
+    <div class="brand-mark">
+      <div class="brand-icon"><img src="logo.png" alt="LearnSphere Logo" width="40"></div>
+      <span class="brand-name">LearnSphere</span>
+    </div>
+    <h2 id="formTitle">Welcome back</h2>
+    <p id="formSub">Sign in to continue your learning journey</p>
+  </div>
+ 
+  <div class="card">
+    <div class="role-grid">
+      <div class="role-opt active" id="roleStudent" onclick="setRole('student')">
+        <div class="ri">🎒</div>
+        <div class="rl">Student</div>
+        <div class="rd">Ask & learn</div>
+      </div>
+      <div class="role-opt" id="roleTeacher" onclick="setRole('teacher')">
+        <div class="ri">🏛️</div>
+        <div class="rl">Teacher</div>
+        <div class="rd">Review & verify</div>
+      </div>
+    </div>
+ 
+    <!-- Login -->
+    <div id="loginView">
+      <div class="field"><label>Email</label><input type="email" id="lEmail" placeholder="you@university.edu"/></div>
+      <div class="field"><label>Password</label><input type="password" id="lPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()"/></div>
+      <button class="btn-main" onclick="login()">Sign In →</button>
+      <div class="switch-text">No account? <a onclick="toggle(true)">Create one</a></div>
+    </div>
+ 
+    <!-- Register -->
+    <div id="regView" class="hidden">
+      <div class="field"><label>Full Name</label><input type="text" id="rName" placeholder="Your full name"/></div>
+      <div class="field"><label>Email</label><input type="email" id="rEmail" placeholder="you@university.edu"/></div>
+      <div class="field" id="domainField" style="display:none"><label>Your Subject / Domain</label><input type="text" id="rDomain" placeholder="e.g. Computer Networks, IoT, ML..."/></div>
+      <div class="field"><label>Password</label><input type="password" id="rPass" placeholder="Min 8 characters" onkeydown="if(event.key==='Enter')register()"/></div>
+      <button class="btn-main" onclick="register()">Create Account →</button>
+      <div class="switch-text">Already have an account? <a onclick="toggle(false)">Sign in</a></div>
+    </div>
+  </div>
+</div>
+ 
+<div class="toast-stack" id="toasts"></div>
+ 
+<script>
+const API='http://localhost:5000/api';
+let role='student';
+ 
+function setRole(r){
+  role=r;
+  document.getElementById('roleStudent').classList.toggle('active',r==='student');
+  document.getElementById('roleTeacher').classList.toggle('active',r==='teacher');
+  const df=document.getElementById('domainField');
+  if(df) df.style.display=r==='teacher'?'block':'none';
+}
+ 
+function toggle(showReg){
+  document.getElementById('loginView').classList.toggle('hidden',showReg);
+  document.getElementById('regView').classList.toggle('hidden',!showReg);
+  document.getElementById('formTitle').textContent=showReg?'Create account':'Welcome back';
+  document.getElementById('formSub').textContent=showReg?'Join LearnSphere today':'Sign in to continue your learning journey';
+}
+ 
+async function login(){
+  const email=document.getElementById('lEmail').value.trim();
+  const password=document.getElementById('lPass').value;
+  if(!email||!password)return toast('Please fill in all fields','err');
+  try{
+    const r=await fetch(`${API}/auth/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+    const d=await r.json();
+    if(!r.ok)return toast(d.error||'Login failed','err');
+    localStorage.setItem('ls_token',d.token);
+    localStorage.setItem('ls_user',JSON.stringify(d.user));
+    window.location.href=d.user.role==='teacher'?'teacher.html':'student.html';
+  }catch{toast('Cannot reach server. Is backend running?','err')}
+}
+ 
+async function register(){
+  const name=document.getElementById('rName').value.trim();
+  const email=document.getElementById('rEmail').value.trim();
+  const password=document.getElementById('rPass').value;
+  const domain=document.getElementById('rDomain')?.value.trim()||'';
+  if(!name||!email||!password)return toast('Please fill in all fields','err');
+  if(role==='teacher'&&!domain)return toast('Please enter your subject/domain','err');
+  try{
+    const r=await fetch(`${API}/auth/register`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,password,role,domain})});
+    const d=await r.json();
+    if(!r.ok)return toast(d.error||'Registration failed','err');
+    localStorage.setItem('ls_token',d.token);
+    localStorage.setItem('ls_user',JSON.stringify(d.user));
+    window.location.href=d.user.role==='teacher'?'teacher.html':'student.html';
+  }catch{toast('Cannot reach server. Is backend running?','err')}
+}
+ 
+function toast(msg,type='ok'){
+  const el=document.createElement('div');
+  el.className=`toast ${type}`;
+  el.textContent=msg;
+  document.getElementById('toasts').appendChild(el);
+  setTimeout(()=>el.remove(),3500);
+}
+ 
+const u=JSON.parse(localStorage.getItem('ls_user')||'null');
+if(u)window.location.href=u.role==='teacher'?'teacher.html':'student.html';
+</script>
+</body>
+</html>
+ 

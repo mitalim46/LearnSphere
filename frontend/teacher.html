@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LearnSphere — Teacher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;450;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+<div class="shell">
+  <aside class="sidebar">
+    <div class="sb-top">
+      <div class="sb-brand">
+        <div class="sb-icon">◈</div>
+        <span class="sb-brand-name">LearnSphere</span>
+      </div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-section">Review</div>
+      <button class="nav-link active" onclick="nav('pending',this)"><span class="nav-icon">⏳</span> Pending Reviews<span class="nav-badge" id="pendBadge">0</span></button>
+      <div class="sb-section">Insights</div>
+      <button class="nav-link" onclick="nav('overview',this)"><span class="nav-icon">◎</span> Overview</button>
+    </nav>
+    <div class="sb-footer">
+      <div class="user-row">
+        <div class="user-ava" id="uAva">T</div>
+        <div class="user-meta">
+          <div class="user-name" id="uName">Teacher</div>
+          <div class="user-role">Educator</div>
+        </div>
+      </div>
+      <button class="btn-out" onclick="logout()">Sign out</button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="topbar-left"><h1 id="pgTitle">Pending Reviews</h1></div>
+      <div class="topbar-right"><button class="btn btn-ghost btn-sm" onclick="loadPending()">↻ Refresh</button></div>
+    </div>
+    <div class="content">
+
+      <!-- PENDING -->
+      <div class="page active" id="pg-pending">
+        <p class="page-sub">Student verification requests. Verify, edit, or reject with feedback.</p>
+        <div class="stack" id="pendList"><div class="loading-row"><div class="spin"></div> Loading...</div></div>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="page" id="pg-overview">
+        <p class="page-sub">Platform activity and answer source breakdown.</p>
+        <div class="grid-3 mb-16">
+          <div class="stat s-accent"><div class="stat-label">Pending Reviews</div><div class="stat-val" id="ovPend">—</div><div class="stat-hint">Awaiting your action</div></div>
+          <div class="stat s-green"><div class="stat-label">Verified Answers</div><div class="stat-val" id="ovVer">—</div><div class="stat-hint"><span>In knowledge base</span></div></div>
+          <div class="stat s-blue"><div class="stat-label">Total Questions</div><div class="stat-val" id="ovTotal">—</div><div class="stat-hint">Asked by students</div></div>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Answer Sources</div><div class="card-sub">How answers are delivered</div></div></div>
+            <div class="card-p" id="srcBreakdown"><div class="loading-row"><div class="spin"></div> Loading...</div></div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Recent Questions</div><div class="card-sub">Latest student activity</div></div></div>
+            <div id="recentQs"><div class="loading-row"><div class="spin"></div> Loading...</div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="toast-stack" id="toasts"></div>
+<script src="js/teacher.js"></script>
+</body>
+</html>
