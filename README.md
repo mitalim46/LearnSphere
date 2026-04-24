@@ -98,7 +98,7 @@ Global verified answer database shared across all students
 </td>
 <td valign="top" width="50%">
 
-###✨Intelligence Layer
+### ✨Intelligence Layer
 Semantic search using vector embeddings<br/>
 Context-aware matching across varied question phrasing
 
