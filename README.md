@@ -69,9 +69,9 @@ LearnSphere uses a strict **3-step priority system** for every question:
 
 | Priority | Source | Condition |
 |---|---|---|
-| **1st** | ✅ Verified Database | Always checked first — global, shared across all students |
-| **2nd** | 📄 Selected PDF | If no verified answer exists — scoped to student's chosen document |
-| **3rd** | 🤖 AI Generation | Only if both above fail — clearly tagged as AI Generated |
+| **1st** |  Verified Database | Always checked first — global, shared across all students |
+| **2nd** |  Selected PDF | If no verified answer exists — scoped to student's chosen document |
+| **3rd** |  AI Generation | Only if both above fail — clearly tagged as AI Generated |
 
 Every answer is labeled: `Verified` · `Resource` · `AI Generated`
 
@@ -85,7 +85,7 @@ Every answer is labeled: `Verified` · `Resource` · `AI Generated`
 
 ---
 
-## ✨ Core Features
+## Core Features
 
 <table>
 <tr>
@@ -98,7 +98,7 @@ Global verified answer database shared across all students
 </td>
 <td valign="top" width="50%">
 
-### 🧠 Intelligence Layer
+###✨Intelligence Layer
 Semantic search using vector embeddings<br/>
 Context-aware matching across varied question phrasing
 
